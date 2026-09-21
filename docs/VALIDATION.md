@@ -8,3 +8,8 @@ The project is considered useful only if its claims remain narrower than the evi
 4. Malformed and incomplete inputs must produce `unknown` or a typed parse failure rather than a guessed pass.
 5. The fixture corpus is observed through at least one mature MusicXML consumer, but consumer acceptance is recorded as evidence, not as semantic proof.
 6. The final README records checks that are not covered, including musical intent, engraving quality, and provider-specific import behavior.
+
+The current fixture corpus is intentionally synthetic and covers a clean score, an
+unclosed slur, a single-voice duration mismatch, an unsupported multi-voice duration
+case, and a missing `dalsegno` target. The witness currently has no claim about whether
+any particular renderer will accept or play a file.

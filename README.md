@@ -1,6 +1,6 @@
 # musicxml-semantic-preflight
 
-`musicxml-semantic-preflight` is a planned dependency-free checker for a narrow class of MusicXML hazards that can survive XSD validation but still change or destabilize a mature consumer's interpretation.
+`musicxml-semantic-preflight` is a dependency-free checker for a narrow class of MusicXML hazards that can survive XSD validation but still change or destabilize a mature consumer's interpretation.
 
 ## Problem
 
@@ -42,6 +42,22 @@ Demand and usefulness remain hypotheses until a real producer, importer, or main
 - XML parsing and path/location checks;
 - `python -m compileall` and `git diff --check` for the initial implementation;
 - an explicit comparison against the exact checks provided by one mature consumer or validator.
+
+## Try the witness
+
+The first offline witness is a single-file CLI using only the Python standard library:
+
+```bash
+python3 preflight.py score.musicxml
+python3 preflight.py score.mxl
+python3 -m unittest discover -s tests -v
+```
+
+The JSON report is deterministic and separates `error`, `warning`, `unknown`, and `pass`.
+The initial implementation checks only balanced `slur`, `tied`, and `octave-shift` spans,
+single-voice computable measure duration, and explicit playback-jump targets. Multiple
+voices and incomplete timing evidence are reported as `unknown`; no repair or musical
+intent inference is attempted.
 
 ## Falsifier and stopping point
 
